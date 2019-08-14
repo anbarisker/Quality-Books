@@ -1,0 +1,35 @@
+@using Microsoft.AspNetCore.Identity
+@using QualityBooks.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+
+    @if (User.IsInRole("Admin"))
+    {
+        <li><a asp-area="" asp-controller="AdminApplicationUsers" asp-action="Index">Users</a></li>
+        <li><a asp-area="" asp-controller="AdminCategories" asp-action="Index">Categories</a></li>
+        <li><a asp-area="" asp-controller="AdminSuppliers" asp-action="Index">Suppliers</a></li>
+        <li><a asp-area="" asp-controller="AdminProducts" asp-action="Index">Products</a></li>
+        <li><a asp-area="" asp-controller="Orders" asp-action="Index">Orders</a></li>
+    }
+    else
+    {
+        <li>
+            <a asp-controller="Orders" asp-action="CustomerIndex"><i class="fa fa-user"></i> My Orders</a>
+        </li>
+        <li>
+            <a asp-controller="ShoppingCart" asp-action="Index"><i class="fa fa-user"></i> My Cart</a>
+        </li>
+    }
+    
+}
+else
+{
+       
+        <li><a asp-area="" asp-controller="Account" asp-action="Register">Register</a></li>
+        <li><a asp-area="" asp-controller="Account" asp-action="Login">Log in</a></li>
+    
+}

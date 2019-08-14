@@ -1,0 +1,83 @@
+﻿@model PaginatedList<QualityBooks.Models.Product>
+
+@{
+    ViewData["Title"] = "Index";
+
+}
+
+<div class="maincontent-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-offset-3 col-md-9" style="text-align:right">
+                <form asp-action="Index" method="get">
+                    <div class="form-actions no-color">
+                        <p>
+                            <input type="text" style="width:200px;" name="SearchString" placeholder="Find by name" value="@ViewData["currentFilter"]" />
+                            <input type="submit" value="Search" class="btn btn-default" /> |
+                            <a class="btn btn-default" asp-action="Index" asp-route-id="">Back to Full List</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <br />
+        <br />
+        <div class="row">
+            <div class="col-md-3">
+                <div class="list-group" id="categories">
+                    <a class="list-group-item" asp-action="Index" asp-route-id="">All Categories</a>
+                    @{
+                        List<QualitySouvenirs.Models.Category> categories = ViewBag.Categories;
+                        foreach (var category in categories)
+                        {
+                            <a class="list-group-item" asp-action="Index" asp-route-id="@category.Id">@category.CategroyName</a>
+                        }
+                    }
+                </div>
+            </div>
+            <div class="col-md-9">
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-3" style="height:450px">
+                        <div class="single-product">
+                            <div class="product-f-image" style="height:300px">
+                                <img src="/patelh44/asp_assignment/@Html.DisplayFor(modelItem => item.ProductImage)" width="300">
+                            </div>
+                            <h2><a asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.ProductName)</a></h2>
+                            <div class="product-carousel-price">
+                                <ins>$@Html.DisplayFor(modelItem => item.ProductPrice)</ins>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <br />
+        <br />
+        <div class="row">
+            @{
+                var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+                var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+            }
+            <div class="col-md-9 col-md-offset-3">
+                <div class="col-md-2" style="text-align:left">
+                    <a asp-action="Index"
+                       asp-route-page="@(Model.PageIndex - 1)"
+                       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                       class="btn btn-default @prevDisabled btn">
+                        <span class="glyphicon glyphicon-step-backward"></span>Previous
+                    </a>
+                </div>
+                <div class="col-md-2" style="text-align:right">
+                    <a asp-action="Index"
+                       asp-route-page="@(Model.PageIndex + 1)"
+                       asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                       class="btn btn-default @nextDisabled btn">
+                        Next<span class="glyphicon glyphicon-step-forward"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,7 +1,71 @@
 ﻿@{
     ViewData["Title"] = "About";
 }
-<h2>@ViewData["Title"]</h2>
-<h3>@ViewData["Message"]</h3>
+<asp:content contentplaceholderid="head" runat="server">
+    <link rel="stylesheet" href="~/about/css/main.css" />
 
-<p>Use this area to provide additional information.</p>
+</asp:content>
+<!-- Highlights -->
+<section class="wrapper">
+    <div class="inner">
+        <header class="special">
+            <h2>About Quality Books</h2>
+            <p>We are the pioneer platfrom for e-commerce books</p>
+        </header>
+        <div class="highlights">
+            <section>
+                <div class="content">
+                    <header>
+                        <a href="#" class="icon fa-vcard-o"><span class="label">Icon</span></a>
+                        <h3>We are</h3>
+                    </header>
+                    <p>We have been in this service over 15 years, we give the best customer services.</p>
+                </div>
+            </section>
+            <section>
+                <div class="content">
+                    <header>
+                        <a href="#" class="icon fa-line-chart"><span class="label">Icon</span></a>
+                        <h3>Best offers</h3>
+                    </header>
+                    <p>Our store as been ranking top one for online shopping for books.</p>
+                </div>
+            </section>
+            <section>
+                <div class="content">
+                    <header>
+                        <a href="#" class="icon fa-paper-plane-o"><span class="label">Icon</span></a>
+                        <h3>Worldwide delivery</h3>
+                    </header>
+                    <p>We delivery our books all around the world.</p>
+                </div>
+            </section>
+            <section>
+                <div class="content">
+                    <header>
+                        <a href="#" class="icon fa-files-o"><span class="label">Icon</span></a>
+                        <h3>E-booksy</h3>
+                    </header>
+                    <p>We do provide e-books services.</p>
+                </div>
+            </section>
+            <section>
+                <div class="content">
+                    <header>
+                        <a href="#" class="icon fa-line-chart"><span class="label">Icon</span></a>
+                        <h3>Customers</h3>
+                    </header>
+                    <p>Customers gave good feedbacks on our fast services.</p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</section>
+<asp:content contentplaceholderid="bodyJS" runat="server">
+    <script src="~/about/js/jquery.min.js"></script>
+    <script src="~/about/js/browser.min.js"></script>
+    <script src="~/about/js/breakpoints.min.js"></script>
+    <script src="~/about/js/util.js"></script>
+    <script src="~/about/js/main.js"></script>
+</asp:content>

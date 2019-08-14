@@ -3,7 +3,6 @@
 /Users/anbarisker/Projects/QualityBooks/QualityBooks/bin/Debug/netcoreapp2.0/QualityBooks.runtimeconfig.dev.json
 /Users/anbarisker/Projects/QualityBooks/QualityBooks/bin/Debug/netcoreapp2.0/QualityBooks.dll
 /Users/anbarisker/Projects/QualityBooks/QualityBooks/bin/Debug/netcoreapp2.0/QualityBooks.pdb
-/Users/anbarisker/Projects/QualityBooks/QualityBooks/obj/Debug/netcoreapp2.0/QualityBooks.csprojAssemblyReference.cache
 /Users/anbarisker/Projects/QualityBooks/QualityBooks/obj/Debug/netcoreapp2.0/QualityBooks.csproj.CoreCompileInputs.cache
 /Users/anbarisker/Projects/QualityBooks/QualityBooks/obj/Debug/netcoreapp2.0/QualityBooks.AssemblyInfoInputs.cache
 /Users/anbarisker/Projects/QualityBooks/QualityBooks/obj/Debug/netcoreapp2.0/QualityBooks.AssemblyInfo.cs
