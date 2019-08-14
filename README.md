@@ -3,7 +3,6 @@ Quality Books, ASP.Net Core 2.0, Web Application Development
 
 # Quality-Books
 
-One Paragraph of project description goes here
 A simple web application (a simple online purchase order system) by using ASP.NET Core 2.0, which is a fictional company selling books. There are two classes of users, a customer user and an administrator user. The application allows an administrator to create records for book categories, create records for books and submit books under a book category. An administrator can also manage customer orders. An administrator can disable a customer shopping account. A customer can view all the available book categories and the books within a category. A customer doesn’t need an account to view the books. However, a customer must have a shopping account to order a book.
 
 ## Getting Started
