@@ -21,10 +21,10 @@ namespace QualityBooks.Models.ManageViewModels
 
         public string Address { get; set; }
 
-        [Required]
+        
         public string Name { get; set; }
 
-        [Required]
+        
         public string MobileNo { get; set; }
 
         public string StatusMessage { get; set; }

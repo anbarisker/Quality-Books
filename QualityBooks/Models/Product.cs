@@ -27,7 +27,7 @@ namespace QualityBooks.Models
         public decimal ProductPrice { get; set; }
 
         [Display(Name = "Image")]
-        public string ProductImage { get; set; }
+        public Byte[] ProductImage { get; set; }
 
         public Category Category { get; set; }
 

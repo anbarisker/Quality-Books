@@ -27,7 +27,7 @@ namespace QualitySouvenirs.Controllers
             _userManager = userManager;
         }
 
-        // GET: Orders
+        // GET: Orders of customers for Admin
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {

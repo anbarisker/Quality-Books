@@ -1,0 +1,97 @@
+﻿@model QualityBooks.Models.ShoppingCartViewModels.ShoppingCartViewModel
+
+@{
+    ViewData["Title"] = "Default";
+
+    decimal totalGST = @Model.CartTotal * Convert.ToDecimal(0.15);
+    decimal grandTotal = @Model.CartTotal + totalGST;
+}
+
+<div class="single-product-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="product-content-right">
+                    <div class="woocommerce">
+                        <table cellspacing="0" class="shop_table cart">
+                            <thead>
+                                <tr>
+                                    <th class="product-remove">&nbsp;</th>
+                                    <th class="product-name">Product</th>
+                                    <th class="product-quantity">Quantity</th>
+                                    <th class="product-subtotal">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (@Model.CartItems.Count > 0)
+                                {
+                                    @foreach (var item in Model.CartItems)
+                                    {
+                                        <tr class="cart_item">
+                                            <td class="product-remove">
+                                                <a asp-action="RemoveFromCart" asp-controller="ShoppingCart" asp-route-id="@item.Product.Id"><span class="glyphicon glyphicon-remove-circle"></span></a>
+                                            </td>
+                                            <td class="product-name">
+                                                <a asp-controller="Products" asp-action="Details" asp-route-id="@item.Product.Id">@item.Product.ProductName</a>
+                                            </td>
+                                            <td class="product-quantity">
+                                                @item.Count
+                                            </td>
+                                            <td class="product-subtotal">
+                                                <span class="amount">$@item.Product.ProductPrice</span>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                    <tr>
+                                        <td class="actions" style="text-align:right" colspan="4">
+                                            <a asp-action="ClearCart" asp-controller="ShoppingCart">
+                                                Clear Cart <span class="glyphicon glyphicon-step-forward"></span>
+                                            </a>
+                                            |
+                                            <a asp-action="Create" asp-controller="Orders">
+                                                Proceed to Checkout <span class="glyphicon glyphicon-step-forward"></span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td colspan="4">
+                                            No Products in the Cart
+                                        </td>
+                                    </tr>
+
+                                }
+                            </tbody>
+                        </table>
+                        @if (@Model.CartItems.Count > 0)
+                        {
+                            <div class="cart-collaterals">
+                                <div class="cart_totals ">
+                                    <h2>Cart Totals</h2>
+                                    <table cellspacing="0">
+                                        <tbody>
+                                            <tr class="order-total">
+                                                <th>Order Sub Total</th>
+                                                <td><strong><span class="amount">$@Model.CartTotal</span></strong> </td>
+                                            </tr><tr class="order-total">
+                                                <th>GST (15%)</th>
+                                                <td><strong><span class="amount">$@Math.Round(totalGST, 2)</span></strong> </td>
+                                            </tr><tr class="order-total">
+                                                <th>Order Total</th>
+                                                <td><strong><span class="amount">$@Math.Round(grandTotal,2)</span></strong> </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

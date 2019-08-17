@@ -14,7 +14,7 @@
                         <div class="col-sm-6">
                             <div class="product-images">
                                 <div class="product-main-img">
-                                    <img src="/patelh44/asp_assignment/@Html.DisplayFor(model => model.ProductImage)" alt="">
+                                    <img src="@Url.Action("GetProductImage", "Products", new{id = Model.Id})" alt="">
                                 </div>
                             </div>
                         </div>
@@ -26,7 +26,7 @@
                                     <ins>$@Html.DisplayFor(model => model.ProductPrice)</ins>
                                 </div>
                                 <div>
-                                    <a href="/patelh44/asp_assignment/ShoppingCart/AddToCart/@Html.DisplayFor(model => model.Id)">
+                                    <a href="~/ShoppingCart/AddToCart/@Html.DisplayFor(model => model.Id)">
                                         <span class="glyphicon glyphicon-shopping-cart"></span>
                                         Add To Cart
                                     </a>

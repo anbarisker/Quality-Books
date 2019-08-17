@@ -21,7 +21,7 @@ namespace QualityBooks.Services
         {
 
             var mes = new MimeMessage();
-            mes.From.Add(new MailboxAddress("QualityBooks", "qualitybooksunitec@hotmail.com"));
+            mes.From.Add(new MailboxAddress("QualityBooks", "Qualitybooksunitec@hotmail.com"));
             mes.To.Add(new MailboxAddress("User", email));
             mes.Subject = subject;
 
@@ -43,7 +43,7 @@ namespace QualityBooks.Services
                 client.AuthenticationMechanisms.Remove("XOAUTH2");
 
                 // Note: only needed if the SMTP server requires authentication
-                client.Authenticate("qualitybooksunitec@hotmail.com", "123456@Ut");
+                client.Authenticate("Qualitybooksunitec@hotmail.com", "123456@Ut");
 
                 client.Send(mes);
                 client.Disconnect(true);

@@ -12,6 +12,7 @@ using System.Net.Http.Headers; //Week 6
 using Microsoft.AspNetCore.Hosting; //Week 6
 using Microsoft.AspNetCore.Http; //Week 6
 using System.IO; //Week 6
+using System.Drawing;
 
 namespace QualityBooks.Controllers
 {
@@ -58,7 +59,7 @@ namespace QualityBooks.Controllers
         // GET: AdminProducts/Create
         public IActionResult Create()
         {
-            PopulateCategoryDropDown();
+            PopulateCategoryDropDown(4);
             PopulateSupplierDropDown();
             return View();
         }
@@ -67,6 +68,7 @@ namespace QualityBooks.Controllers
         {
             var categoriesQuery = from d in _context.Categories select d;
             ViewBag.CategoryId = new SelectList(categoriesQuery.AsNoTracking(), "Id", "CategroyName", selectCategory);
+            
         }
 
         private void PopulateSupplierDropDown(object selectSupplier = null)
@@ -82,9 +84,9 @@ namespace QualityBooks.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CategoryId,SupplierId,ProductName,ProductPrice")] Product product, IList<IFormFile> _files)
+        public async Task<IActionResult> Create([Bind("Id,CategoryId,SupplierId,ProductName,ProductPrice")] Product product, IFormFile _files)
         {
-
+            /*
             var relativeName = "";
             var fileName = "";
 
@@ -111,11 +113,34 @@ namespace QualityBooks.Controllers
                 }
                 product.ProductImage = relativeName;
             }
+            */
+
+            
 
             try
             {
                 if (ModelState.IsValid)
                 {
+                    if (_files != null)
+                    {
+                        using (var memoryStream = new MemoryStream())
+                        {
+                            await _files.CopyToAsync(memoryStream);
+                            product.ProductImage = memoryStream.ToArray();
+                        }
+                    }
+                    else
+                    {
+
+                        //string path = AppDomain.CurrentDomain.BaseDirectory + "defaultBook.jpg";
+                        // string path = @"..\wwwroot\images\Temp\defaultBook.jpg";
+                        string path = Environment.CurrentDirectory + @"/wwwroot/images/Temp/defaultBook.jpg";
+                        byte[] image = System.IO.File.ReadAllBytes(path);
+
+                        product.ProductImage = image;
+
+                    }
+
                     _context.Add(product);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
@@ -158,6 +183,7 @@ namespace QualityBooks.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,CategoryId,SupplierId,ProductName,ProductPrice,ProductImage")] Product product, IFormFile uploadFile)
         {
+            /*
             var relativeName = "";
             var fileName = "";
 
@@ -180,11 +206,23 @@ namespace QualityBooks.Controllers
             }
 
             product.ProductImage = relativeName;
-
+            */
+           
+           
             if (ModelState.IsValid)
             {
                 try
                 {
+                    if (uploadFile != null)
+                    {
+                        using (var memoryStream = new MemoryStream())
+                        {
+                            await uploadFile.CopyToAsync(memoryStream);
+                            product.ProductImage = memoryStream.ToArray();
+                        }
+                    }
+                    
+                    
                     _context.Update(product);
                     await _context.SaveChangesAsync();
                 }
@@ -248,6 +286,21 @@ namespace QualityBooks.Controllers
         private bool ProductExists(int id)
         {
             return _context.Products.Any(e => e.Id == id);
+        }
+
+        public async Task<ActionResult> GetProductImage(int id)
+        {
+
+            var product = await _context.Products.SingleAsync(m => m.Id == id);
+
+                
+                if (product == null)
+            {
+                throw new ApplicationException($"Unable to product image with ID"+id+".");
+            }
+            byte[] bytes = product.ProductImage; //Get the image from your database
+            return File(bytes, "image/jpeg"); //or "image/jpeg", depending on the format
+            
         }
     }
 }

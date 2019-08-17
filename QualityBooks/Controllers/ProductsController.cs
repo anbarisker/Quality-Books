@@ -8,13 +8,17 @@ using Microsoft.EntityFrameworkCore;
 using QualityBooks.Data;
 using QualityBooks.Models;
 using Microsoft.AspNetCore.Authorization;
+using QualityBooks.Controllers;
+using Microsoft.AspNetCore.Hosting;
 
 namespace QualityBooks.Controllers
 {
+
     //[Authorize(Roles = "Member")]
     public class ProductsController : Controller
     {
         private readonly QualityBooksContext _context;
+        private readonly IHostingEnvironment _hostingEnv;
 
         public ProductsController(QualityBooksContext context)
         {
@@ -71,6 +75,14 @@ namespace QualityBooks.Controllers
 
             return View(product);
         }
-        
+
+        public async Task<ActionResult> GetProductImage(int id)
+        {
+            AdminProductsController obj = new AdminProductsController(_context,_hostingEnv);
+
+            return await obj.GetProductImage(id);
+
+         }
+
     }
 }

@@ -60,8 +60,7 @@ namespace QualityBooks.Models.AccountViewModels
         [Display(Name = "PostalCode")]
         public String PostalCode { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+        
         [Display(Name = "Country")]
         public String Country { get; set; }
 

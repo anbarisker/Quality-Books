@@ -1,0 +1,52 @@
+﻿@model QualityBooks.Models.Supplier
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="maincontent-area">
+    <div class="container">
+        <div class="row">
+            <div>
+                <h4>Supplier</h4>
+                <hr />
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.FirstName)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.FirstName)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.LastName)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.LastName)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.HomePhoneNo)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.HomePhoneNo)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.MobileNo)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.MobileNo)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Email)
+                    </dd>
+                </dl>
+            </div>
+            <div>
+                <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+                <a asp-action="Index">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>

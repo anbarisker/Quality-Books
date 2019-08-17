@@ -8,3 +8,4 @@
 /Users/anbarisker/Projects/QualityBooks/QualityBooks/obj/Debug/netcoreapp2.0/QualityBooks.AssemblyInfo.cs
 /Users/anbarisker/Projects/QualityBooks/QualityBooks/obj/Debug/netcoreapp2.0/QualityBooks.dll
 /Users/anbarisker/Projects/QualityBooks/QualityBooks/obj/Debug/netcoreapp2.0/QualityBooks.pdb
+/Users/anbarisker/Projects/QualityBooks/QualityBooks/obj/Debug/netcoreapp2.0/QualityBooks.csprojAssemblyReference.cache

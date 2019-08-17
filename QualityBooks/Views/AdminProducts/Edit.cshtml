@@ -1,0 +1,61 @@
+﻿@model QualityBooks.Models.Product
+
+@{
+    ViewData["Title"] = "Edit";
+    var id = Model.Id;
+}
+
+<div class="maincontent-area">
+    <div class="container">
+        <div class="row">
+
+            <h4>Product</h4>
+            <hr />
+            <div class="row">
+                <div class="col-md-4">
+                    <form asp-action="Edit" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Id" />
+                        <div class="form-group">
+                            <label asp-for="CategoryId" class="control-label"></label>
+                            <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+                            <span asp-validation-for="CategoryId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="SupplierId" class="control-label"></label>
+                            <select asp-for="SupplierId" class="form-control" asp-items="ViewBag.SupplierId"></select>
+                            <span asp-validation-for="SupplierId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ProductName" class="control-label"></label>
+                            <input asp-for="ProductName" class="form-control" />
+                            <span asp-validation-for="ProductName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ProductPrice" class="control-label"></label>
+                            <input asp-for="ProductPrice" class="form-control" />
+                            <span asp-validation-for="ProductPrice" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ProductImage" class="control-label"></label>
+                            <img id="img-preview" class="img-responsive" style="max-width: 150px;" src="@Url.Action("GetProductImage", "AdminProducts", new{id = id})" alt="Bag Image" />
+                            <input type="file" name="uploadFile" id="uploadFile" />
+                            <input type="hidden" asp-for="ProductImage"/>
+                            <span asp-validation-for="ProductImage" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Save" class="btn btn-default" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div>
+                <a asp-action="Index">Back to List</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
