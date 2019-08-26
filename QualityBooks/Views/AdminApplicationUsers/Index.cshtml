@@ -2,20 +2,32 @@
 @{
     ViewData["Title"] = "Index";
 }
+<asp:content contentplaceholderid="head" runat="server">
+    <link rel="stylesheet" type="text/css" href="~/css/AdminUsermanger.css">
+
+</asp:content>
+
 <div id="subcontiner">
     <div class="maincontent-area">
         <div class="container">
-            <div class="row">
-                <h2>Users</h2>
-                <table class="table">
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <h2>User <b>Management</b></h2>
+                        </div>
+                        <div class="col-sm-7">
+                            <!--   <a href="#" class="btn btn-primary"><i class="material-icons">&#xE147;</i> <span>Add New User</span></a>
+                        <a href="#" class="btn btn-primary"><i class="material-icons">&#xE24D;</i> <span>Export to Excel</span></a>
+                -->
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped table-hover">
                     <thead>
                         <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Enabled)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.FirstName)
-                            </th>
+                            <th>@Html.DisplayNameFor(model => model.Enabled)</th>
+                            <th>@Html.DisplayNameFor(model => model.FirstName)</th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Email)
                             </th>
@@ -26,42 +38,126 @@
                                 @Html.DisplayNameFor(model => model.MobileNo)
                             </th>
                             <th></th>
+
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Enabled)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.FirstName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Email)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Address)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.MobileNo)
-                                </td>
-                                <td>
-                                    @if (item.Enabled == true)
-                                    {
-                                        <a asp-action="EnableDisable" asp-route-id="@item.Id">Disable</a>;
-                                    }
-                                    else
-                                    {
-                                        <a asp-action="EnableDisable" asp-route-id="@item.Id">Enable</a>
-                                    }
-                                </td>
-                            </tr>
-                        }
+            {
+                <tr>
+                    <td>
+                        @if (item.Enabled == true)
+            {
+                <span class="status text-success">&bull;</span>
+}
+else
+{
+            <span class="status text-danger">&bull;</span>
+}
+
+                    </td>
+                    <td>
+                        <img src="@Url.Action("GetUsersPhoto", "AdminApplicationUsers", new{id = item.Id})" width="50" height="50" class="avatar" alt="Avatar" /> @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MobileNo)
+                    </td>
+                    <td>
+                        @if (item.Enabled == true)
+            {
+                <a asp-action="EnableDisable" asp-route-id="@item.Id">Disable</a>;
+}
+else
+{
+            <a asp-action="EnableDisable" asp-route-id="@item.Id">Enable</a>
+}
+                    </td>
+                </tr>
+}
+
                     </tbody>
                 </table>
+                <!--
+    <div class="clearfix">
+        <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+        <ul class="pagination">
+            <li class="page-item disabled"><a href="#">Previous</a></li>
+            <li class="page-item"><a href="#" class="page-link">1</a></li>
+            <li class="page-item"><a href="#" class="page-link">2</a></li>
+            <li class="page-item active"><a href="#" class="page-link">3</a></li>
+            <li class="page-item"><a href="#" class="page-link">4</a></li>
+            <li class="page-item"><a href="#" class="page-link">5</a></li>
+            <li class="page-item"><a href="#" class="page-link">Next</a></li>
+        </ul>
+    </div>
+        -->
             </div>
+
+
+            <!-- <div class="row">
+         <h2>Users</h2>
+         <table class="table">
+             <thead>
+                 <tr>
+                     <th>
+                         @Html.DisplayNameFor(model => model.Enabled)
+                     </th>
+                     <th>
+                         @Html.DisplayNameFor(model => model.FirstName)
+                     </th>
+                     <th>
+                         @Html.DisplayNameFor(model => model.Email)
+                     </th>
+                     <th>
+                         @Html.DisplayNameFor(model => model.Address)
+                     </th>
+                     <th>
+                         @Html.DisplayNameFor(model => model.MobileNo)
+                     </th>
+                     <th></th>
+                 </tr>
+             </thead>
+             <tbody>
+                 @foreach (var item in Model)
+                 {
+                     <tr>
+                         <td>
+                             @Html.DisplayFor(modelItem => item.Enabled)
+                         </td>
+                         <td>
+                             @Html.DisplayFor(modelItem => item.FirstName)
+                         </td>
+                         <td>
+                             @Html.DisplayFor(modelItem => item.Email)
+                         </td>
+                         <td>
+                             @Html.DisplayFor(modelItem => item.Address)
+                         </td>
+                         <td>
+                             @Html.DisplayFor(modelItem => item.MobileNo)
+                         </td>
+                         <td>
+                             @if (item.Enabled == true)
+                             {
+                                 <a asp-action="EnableDisable" asp-route-id="@item.Id">Disable</a>;
+                             }
+                             else
+                             {
+                                 <a asp-action="EnableDisable" asp-route-id="@item.Id">Enable</a>
+                             }
+                         </td>
+                     </tr>
+                 }
+             </tbody>
+         </table>
+     </div>
+        -->
         </div>
     </div>
 </div>

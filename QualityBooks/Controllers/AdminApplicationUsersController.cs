@@ -58,7 +58,21 @@ namespace QualityBooks.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+        public async Task<ActionResult> GetUsersPhoto(string id)
+        {
 
+            var users = await _context.ApplicationUser.SingleAsync(m => m.Id == id);
+
+
+
+            if (users == null)
+            {
+                throw new ApplicationException($"Unable to get user image with ID" + id + ".");
+            }
+            byte[] bytes = users.Photo; //Get the image from your database
+            return File(bytes, "image/jpeg"); //or "image/jpeg", depending on the format
+
+        }
 
     }
 }

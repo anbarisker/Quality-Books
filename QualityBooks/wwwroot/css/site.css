@@ -11,7 +11,7 @@
 }
 body {
     padding-top: 50px;
-    padding-bottom: 20px;
+   padding-bottom: 19px;
 
 }
 
@@ -105,15 +105,17 @@ h2.contact_header {
 /*End main container*/
 
 /*Start main footer*/
-.footer {
+#footer {
     background-color: black;
     color: white;
     position: relative;
-    bottom: 10px;
+    /*bottom: 10px;*/
     padding-left: 100px;
     overflow: hidden;
     max-width: 100%;
+
 }
+
 /*End main footer*/
 
 /*Start Logged Nav*/
@@ -151,3 +153,9 @@ h2.contact_header {
     margin: 0 auto;
 }
 /*End SubContiner*/
+/*User avater everwhere*/
+#avatar {
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-right: 10px;
+}

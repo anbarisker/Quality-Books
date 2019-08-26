@@ -76,13 +76,8 @@ namespace QualityBooks.Controllers
             return View(product);
         }
 
-        public async Task<ActionResult> GetProductImage(int id)
-        {
-            AdminProductsController obj = new AdminProductsController(_context,_hostingEnv);
-
-            return await obj.GetProductImage(id);
-
-         }
+        
+        
 
     }
 }
