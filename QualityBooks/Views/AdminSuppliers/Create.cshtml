@@ -1,56 +1,104 @@
-﻿@model QualityBooks.Models.Supplier
-
-@{
-    ViewData["Title"] = "Create";
+﻿@{
+    Layout = null;
 }
+@model QualityBooks.Models.Supplier
+@*
+    @{
+        ViewData["Title"] = "Create";
+    }
 
-<div class="maincontent-area">
-    <div class="container">
-        <div class="row">
-            <h4>Supplier</h4>
-            <hr />
+    <div class="maincontent-area">
+        <div class="container">
             <div class="row">
-                <div class="col-md-4">
-                    <form asp-action="Create">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <div class="form-group">
-                            <label asp-for="FirstName" class="control-label"></label>
-                            <input asp-for="FirstName" class="form-control" />
-                            <span asp-validation-for="FirstName" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="LastName" class="control-label"></label>
-                            <input asp-for="LastName" class="form-control" />
-                            <span asp-validation-for="LastName" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="HomePhoneNo" class="control-label"></label>
-                            <input asp-for="HomePhoneNo" class="form-control" />
-                            <span asp-validation-for="HomePhoneNo" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="MobileNo" class="control-label"></label>
-                            <input asp-for="MobileNo" class="form-control" />
-                            <span asp-validation-for="MobileNo" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Email" class="control-label"></label>
-                            <input asp-for="Email" class="form-control" />
-                            <span asp-validation-for="Email" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" value="Create" class="btn btn-default" />
-                        </div>
-                    </form>
+                <h4>Supplier</h4>
+                <hr />
+                <div class="row">
+                    <div class="col-md-4">
+                        <form asp-action="Create">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="FirstName" class="control-label"></label>
+                                <input asp-for="FirstName" class="form-control" />
+                                <span asp-validation-for="FirstName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="LastName" class="control-label"></label>
+                                <input asp-for="LastName" class="form-control" />
+                                <span asp-validation-for="LastName" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="HomePhoneNo" class="control-label"></label>
+                                <input asp-for="HomePhoneNo" class="form-control" />
+                                <span asp-validation-for="HomePhoneNo" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="MobileNo" class="control-label"></label>
+                                <input asp-for="MobileNo" class="form-control" />
+                                <span asp-validation-for="MobileNo" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Email" class="control-label"></label>
+                                <input asp-for="Email" class="form-control" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Create" class="btn btn-default" />
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </div>
 
-            <div>
-                <a asp-action="Index">Back to List</a>
+                <div>
+                    <a asp-action="Index">Back to List</a>
+                </div>
             </div>
         </div>
     </div>
+*@
+<div class="modal-header text-center">
+    <h4 class="modal-title w-100 font-weight-bold">Create Supplier</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
 </div>
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+<form asp-action="Create">
+    <div class="modal-body mx-3">
+
+        <div class="md-form mb-5">
+            <i class="fas fa-user prefix grey-text"></i>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HomePhoneNo" class="control-label"></label>
+                <input asp-for="HomePhoneNo" class="form-control" />
+                <span asp-validation-for="HomePhoneNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MobileNo" class="control-label"></label>
+                <input asp-for="MobileNo" class="form-control" />
+                <span asp-validation-for="MobileNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer d-flex justify-content-center">
+        <input type="submit" value="Create" class="btn btn-deep-orange" />
+    </div>
+</form>
+<asp:content contentplaceholderid="bodyJS" runat="server">
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+</asp:content>

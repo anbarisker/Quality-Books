@@ -12,6 +12,8 @@
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 </asp:content>
+
+
 <div id="subcontiner">
     <div class="maincontent-area">
         <div class="container">
@@ -46,7 +48,6 @@
                                     @Html.DisplayFor(modelItem => item.CategroyName)
                                 </td>
                                 <td>
-
                                     <a asp-action="Edit" asp-route-id="@item.Id" data-toggle="modal" data-target="#modalEditCateogry"><i class="material-icons edit">&#xe3c9;</i></a>
                                     <a asp-action="Delete" asp-route-id="@item.Id" data-toggle="modal" data-target="#modalDeleteCateogry"><i class="material-icons delete">&#xe872;</i></a>
                                 </td>
@@ -103,5 +104,6 @@
         </div>
     </div>
 </div>
+
 
 

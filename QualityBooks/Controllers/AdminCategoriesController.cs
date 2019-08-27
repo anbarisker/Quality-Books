@@ -67,6 +67,7 @@ namespace QualityBooks.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(category);
+            
         }
 
         // GET: AdminCategories/Edit/5
