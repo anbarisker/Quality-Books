@@ -84,7 +84,7 @@ namespace QualityBooks.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CategoryId,SupplierId,ProductName,ProductPrice")] Product product, IFormFile _files)
+        public async Task<IActionResult> Create([Bind("Id,CategoryId,SupplierId,ProductName,ProductPrice, Description")] Product product, IFormFile _files)
         {
             /*
             var relativeName = "";
@@ -181,7 +181,7 @@ namespace QualityBooks.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CategoryId,SupplierId,ProductName,ProductPrice,ProductImage")] Product product, IFormFile uploadFile)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CategoryId,SupplierId,ProductName,ProductPrice,ProductImage, Description")] Product product, IFormFile uploadFile)
         {
             /*
             var relativeName = "";

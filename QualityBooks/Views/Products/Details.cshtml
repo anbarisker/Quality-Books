@@ -1,45 +1,123 @@
-﻿@model QualityBooks.Models.Product
-
-@{
-    ViewData["Title"] = "Details";
+﻿@{
+    Layout = null;
 }
-<div id="subcontiner" class="product_Bg">
-    <div class="single-product-area">
-        <div class="zigzag-bottom"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="product-content-right">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="product-images">
-                                    <div class="product-main-img">
-                                        <img src="@Url.Action("GetProductImage", "Products", new{id = Model.Id})" alt="books">
-                                    </div>
-                                </div>
-                            </div>
+@model QualityBooks.Models.Product
+@*
+    @{
+        ViewData["Title"] = "Details";
+    }
+    <div id="subcontiner" class="product_Bg">
+        <div class="single-product-area">
+            <div class="zigzag-bottom"></div>
+            <div class="container">
 
-                            <div class="col-sm-6">
-                                <div class="product-inner">
-                                    <h2 class="product-name">@Html.DisplayFor(model => model.ProductName)</h2>
-                                    <div class="product-inner-price">
-                                        <ins>$@Html.DisplayFor(model => model.ProductPrice)</ins>
-                                    </div>
-                                    <div>
-                                        <a href="~/ShoppingCart/AddToCart/@Html.DisplayFor(model => model.Id)">
-                                            <span class="glyphicon glyphicon-shopping-cart"></span>
-                                            Add To Cart
-                                        </a>
-                                    </div>
+                <div class="container-fliud">
+                    <div class="wrapper row">
+                        <div class="preview col-md-6">
+                            <div class="preview-pic tab-content">
+                                <div class="product-images">
+                                    <img src="@Url.Action("GetProductImage", "Products", new{id = Model.Id})" alt="books">
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div>
-                        <a asp-action="Index">Back to List</a>
+                        <div class="col-md-6">
+                            <div class="product-inner">
+                                <h3 class="product-name">@Html.DisplayFor(model => model.ProductName)</h3>
+                                <p class="product-description">@Html.DisplayFor(model => model.Description)</p>
+                                <h4 class="price">Current Price: <span>$@Html.DisplayFor(model => model.ProductPrice)</span></h4>
+                                <div class="action">
+                                    <a href="~/ShoppingCart/AddToCart/@Html.DisplayFor(model => model.Id)">
+                                        <span class="glyphicon glyphicon-shopping-cart"></span>
+                                        Add To Cart
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
+
+
+
+
+                @*
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="product-content-right">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="product-images">
+                                            <img src="@Url.Action("GetProductImage", "Products", new{id = Model.Id})" alt="books">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="product-inner">
+                                            <h2 class="product-name">@Html.DisplayFor(model => model.ProductName)</h2>
+                                            <div class="product-inner-price">
+                                                <ins>$@Html.DisplayFor(model => model.ProductPrice)</ins>
+                                            </div>
+                                            <div>
+                                                <ins>@Html.DisplayFor(model => model.Description)</ins>
+                                            </div>
+                                            <div>
+                                                <a href="~/ShoppingCart/AddToCart/@Html.DisplayFor(model => model.Id)">
+                                                    <span class="glyphicon glyphicon-shopping-cart"></span>
+                                                    Add To Cart
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <a asp-action="Index">Back to List</a>
+                            </div>
+                        </div>
+                    </div>
+*@ @*
+        </div>
+    </div>
+</div>
+*@
+<div class="modal-header text-center">
+    <h4 class="modal-title w-100 font-weight-bold">@Html.DisplayFor(model => model.ProductName) Details</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body mx-3">
+    <div class="md-form mb-5">
+        <i class="fas fa-user prefix grey-text"></i>
+        <div class="container-fliud">
+            <div class="wrapper row">
+                <div class="preview col-md-6">
+                    <div class="preview-pic tab-content">
+                        <div class="product-images">
+                            <img src="@Url.Action("GetProductImage", "Products", new{id = Model.Id})" style="width:150px; height:150px;" alt="books">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="product-inner">
+                        <h3 class="product-name">@Html.DisplayFor(model => model.ProductName)</h3>
+                        <p class="product-description">@Html.DisplayFor(model => model.Description)</p>
+                        <h4 class="price">Current Price: <span>$@Html.DisplayFor(model => model.ProductPrice)</span></h4>
+                        <div class="action">
+                            <a href="~/ShoppingCart/AddToCart/@Html.DisplayFor(model => model.Id)">
+                                <span class="glyphicon glyphicon-shopping-cart"></span>
+                                Add To Cart
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
 </div>
+
+<asp:content contentplaceholderid="bodyJS" runat="server">
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+</asp:content>

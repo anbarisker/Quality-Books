@@ -70,7 +70,7 @@
                         <div class="product-f-image">
                             <img src="@Url.Action("GetProductImage", "Products", new{id = item.Id})" width="100" height="100" />
                         </div>
-                        <h2><a asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.ProductName)</a></h2>
+                        <h2><a asp-action="Details" asp-route-id="@item.Id" data-toggle="modal" data-target="#modalDetailProduct">@Html.DisplayFor(modelItem => item.ProductName)</a></h2>
                         <div class="product-carousel-price">
                             <ins>$@Html.DisplayFor(modelItem => item.ProductPrice)</ins>
                             <a href="~/ShoppingCart/AddToCart/@Html.DisplayFor(modelItem => item.Id)">
@@ -139,6 +139,15 @@ else
                 </div>
                 *@
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalDetailProduct" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
         </div>
     </div>
 </div>

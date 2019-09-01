@@ -26,6 +26,10 @@ namespace QualityBooks.Models
         [Display(Name = "Price")]
         public decimal ProductPrice { get; set; }
 
+        [Required]
+        [Display(Name = "Description")]
+        public string Description { get; set; }
+
         [Display(Name = "Image")]
         public Byte[] ProductImage { get; set; }
 
