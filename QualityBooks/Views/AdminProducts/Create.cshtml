@@ -1,5 +1,8 @@
-﻿@model QualityBooks.Models.Product
-
+﻿@{
+    Layout = null;
+}
+@model QualityBooks.Models.Product
+@*
 @{
     ViewData["Title"] = "Create";
 }
@@ -58,3 +61,55 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+*@
+<div class="modal-header text-center">
+    <h4 class="modal-title w-100 font-weight-bold">Create Product</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<form asp-action="Create" enctype="multipart/form-data" id="createProduct">
+    <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+            <i class="fas fa-user prefix grey-text"></i>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label"></label>
+                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId" Selected="true" Value="4">
+                    <option value="">-- Select Category --</option>
+                </select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SupplierId" class="control-label"></label>
+                <select asp-for="SupplierId" class="form-control" asp-items="ViewBag.SupplierId">
+                    <option value="">-- Select Supplier --</option>
+                </select>
+                <span asp-validation-for="SupplierId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductName" class="control-label"></label>
+                <input asp-for="ProductName" class="form-control" />
+                <span asp-validation-for="ProductName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductPrice" class="control-label"></label>
+                <input asp-for="ProductPrice" class="form-control" />
+                <span asp-validation-for="ProductPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductImage" class="control-label"></label>
+                <input type="file" name="_files" id="_files" />
+                <span asp-validation-for="ProductImage" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer d-flex justify-content-center">
+        <input id="SubmitButton" type="submit" value="Create" class="btn btn-deep-orange" />
+    </div>
+</form>
+
+<asp:content contentplaceholderid="bodyJS" runat="server">
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+</asp:content>

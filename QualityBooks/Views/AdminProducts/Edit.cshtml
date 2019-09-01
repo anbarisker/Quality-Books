@@ -1,5 +1,9 @@
-﻿@model QualityBooks.Models.Product
-
+﻿@{
+    Layout = null;
+}
+@model QualityBooks.Models.Product
+ @{var id = Model.Id; }
+@*
 @{
     ViewData["Title"] = "Edit";
     var id = Model.Id;
@@ -40,7 +44,7 @@
                             <label asp-for="ProductImage" class="control-label"></label>
                             <img id="img-preview" class="img-responsive" style="max-width: 150px;" src="@Url.Action("GetProductImage", "AdminProducts", new{id = id})" alt="Bag Image" />
                             <input type="file" name="uploadFile" id="uploadFile" />
-                            <input type="hidden" asp-for="ProductImage"/>
+                            <input type="hidden" asp-for="ProductImage" />
                             <span asp-validation-for="ProductImage" class="text-danger"></span>
                         </div>
                         <div class="form-group">
@@ -59,3 +63,57 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+*@
+
+<div class="modal-header text-center">
+    <h4 class="modal-title w-100 font-weight-bold">Edit Product</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<form asp-action="Edit" enctype="multipart/form-data">
+    <div class="modal-body mx-3">
+
+        <div class="md-form mb-5">
+            <i class="fas fa-user prefix grey-text"></i>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+                        <div class="form-group">
+                            <label asp-for="CategoryId" class="control-label"></label>
+                            <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
+                            <span asp-validation-for="CategoryId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="SupplierId" class="control-label"></label>
+                            <select asp-for="SupplierId" class="form-control" asp-items="ViewBag.SupplierId"></select>
+                            <span asp-validation-for="SupplierId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ProductName" class="control-label"></label>
+                            <input asp-for="ProductName" class="form-control" />
+                            <span asp-validation-for="ProductName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ProductPrice" class="control-label"></label>
+                            <input asp-for="ProductPrice" class="form-control" />
+                            <span asp-validation-for="ProductPrice" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ProductImage" class="control-label"></label>
+                            <img id="img-preview" class="img-responsive" style="max-width: 150px;" src="@Url.Action("GetProductImage", "AdminProducts", new{id = id})" alt="Bag Image" />
+                            <input type="file" name="uploadFile" id="uploadFile" />
+                            <input type="hidden" asp-for="ProductImage" />
+                            <span asp-validation-for="ProductImage" class="text-danger"></span>
+                        </div>
+        </div>
+    </div>
+    <div class="modal-footer d-flex justify-content-center">
+
+        <input type="submit" value="Save" class="btn btn-deep-orange" />
+    </div>
+</form>
+<asp:content contentplaceholderid="bodyJS" runat="server">
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+</asp:content>
+

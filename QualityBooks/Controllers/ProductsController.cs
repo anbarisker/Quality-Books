@@ -76,8 +76,23 @@ namespace QualityBooks.Controllers
             return View(product);
         }
 
-        
-        
+        public async Task<ActionResult> GetProductImage(int id)
+        {
+
+            var product = await _context.Products.SingleAsync(m => m.Id == id);
+
+
+            if (product == null)
+            {
+                throw new ApplicationException($"Unable to product image with ID" + id + ".");
+            }
+            byte[] bytes = product.ProductImage; //Get the image from your database
+            return File(bytes, "image/jpeg"); //or "image/jpeg", depending on the format
+
+        }
+
+
+
 
     }
 }

@@ -3,8 +3,95 @@
 @{
     ViewData["Title"] = "Index";
 }
-<div class="maincontent-area">
-    <div class="container">
+<asp:content contentplaceholderid="head" runat="server">
+    <link rel="stylesheet" type="text/css" href="~/css/AdminUsermanger.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</asp:content>
+<div id="subcontiner">
+    <div class="maincontent-area">
+        <div class="container">
+            <div class="table-wrapper">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <h2>Products <b>Management</b></h2>
+                        </div>
+                        <div class="col-sm-7">
+                            <a asp-action="Create" class="btn btn-primary" data-toggle="modal" data-target="#modalCreateProduct"><i class="material-icons">&#xE147;</i>Add Product</a>
+                            <!--   <a href="#" class="btn btn-primary"><i class="material-icons">&#xE147;</i> <span>Add New User</span></a>
+                            <a href="#" class="btn btn-primary"><i class="material-icons">&#xE24D;</i> <span>Export to Excel</span></a>
+                    -->
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ProductImage)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ProductName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CategoryId)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.SupplierId)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ProductPrice)
+                            </th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                {
+                    var id = item.Id;
+                    <tr>
+                        <td>
+                            <img src="@Url.Action("GetProductImage", "AdminProducts", new{id = id})" width="50" height="50" />
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProductName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Category.CategroyName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Supplier.FirstName)
+                        </td>
+                        <td>
+                            $@Html.DisplayFor(modelItem => item.ProductPrice)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id" data-toggle="modal" data-target="#modalEditProduct"><i class="material-icons edit">&#xe3c9;</i></a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" data-toggle="modal" data-target="#modalDeleteProduct"><i class="material-icons delete">&#xe872;</i></a>
+                            @*<a asp-action="Details" asp-route-id="@item.Id" data-toggle="modal" data-target="#modalDetailProduct"><i class="material-icons">description</i></a>*@
+                        </td>
+                    </tr>
+        }
+                    </tbody>
+                </table>
+                <!--
+        <div class="clearfix">
+            <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+            <ul class="pagination">
+                <li class="page-item disabled"><a href="#">Previous</a></li>
+                <li class="page-item"><a href="#" class="page-link">1</a></li>
+                <li class="page-item"><a href="#" class="page-link">2</a></li>
+                <li class="page-item active"><a href="#" class="page-link">3</a></li>
+                <li class="page-item"><a href="#" class="page-link">4</a></li>
+                <li class="page-item"><a href="#" class="page-link">5</a></li>
+                <li class="page-item"><a href="#" class="page-link">Next</a></li>
+            </ul>
+        </div>
+            -->
+            </div>
+            @*
         <div class="row">
             <p>
                 <a asp-action="Create">Create New</a>
@@ -61,5 +148,43 @@
                 </tbody>
             </table>
         </div>
-    </div>
-</div>
+            *@
+        </div>
+            </div>
+        </div>
+
+
+            <div class="modal fade" id="modalCreateProduct" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="modalDeleteProduct" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="modalEditProduct" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="modalDetailProduct" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+
+                    </div>
+                </div>
+            </div>

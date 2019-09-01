@@ -3,40 +3,41 @@
 @{
     ViewData["Title"] = "Details";
 }
-
-<div class="single-product-area">
-    <div class="zigzag-bottom"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="product-content-right">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="product-images">
-                                <div class="product-main-img">
-                                    <img src="@Url.Action("GetProductImage", "Products", new{id = Model.Id})" alt="">
+<div id="subcontiner" class="product_Bg">
+    <div class="single-product-area">
+        <div class="zigzag-bottom"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="product-content-right">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="product-images">
+                                    <div class="product-main-img">
+                                        <img src="@Url.Action("GetProductImage", "Products", new{id = Model.Id})" alt="books">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-sm-6">
-                            <div class="product-inner">
-                                <h2 class="product-name">@Html.DisplayFor(model => model.ProductName)</h2>
-                                <div class="product-inner-price">
-                                    <ins>$@Html.DisplayFor(model => model.ProductPrice)</ins>
-                                </div>
-                                <div>
-                                    <a href="~/ShoppingCart/AddToCart/@Html.DisplayFor(model => model.Id)">
-                                        <span class="glyphicon glyphicon-shopping-cart"></span>
-                                        Add To Cart
-                                    </a>
+                            <div class="col-sm-6">
+                                <div class="product-inner">
+                                    <h2 class="product-name">@Html.DisplayFor(model => model.ProductName)</h2>
+                                    <div class="product-inner-price">
+                                        <ins>$@Html.DisplayFor(model => model.ProductPrice)</ins>
+                                    </div>
+                                    <div>
+                                        <a href="~/ShoppingCart/AddToCart/@Html.DisplayFor(model => model.Id)">
+                                            <span class="glyphicon glyphicon-shopping-cart"></span>
+                                            Add To Cart
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div>
-                    <a asp-action="Index">Back to List</a>
+                    <div>
+                        <a asp-action="Index">Back to List</a>
+                    </div>
                 </div>
             </div>
         </div>

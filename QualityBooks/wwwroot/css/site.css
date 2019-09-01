@@ -159,3 +159,15 @@ h2.contact_header {
     vertical-align: middle;
     margin-right: 10px;
 }
+/*User managment nav */
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+    color: white;
+    background-color: black;
+}
+/*
+#subcontiner.product_Bg {
+    background: rgb(2,0,36);
+    background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(15,15,171,1) 43%, rgba(0,212,255,1) 100%);
+}
+*/
+

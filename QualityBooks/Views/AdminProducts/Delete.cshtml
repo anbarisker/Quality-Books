@@ -1,43 +1,90 @@
-﻿@model QualityBooks.Models.Product
-
-@{
-    ViewData["Title"] = "Delete";
+﻿@{
+    Layout = null;
 }
+@model QualityBooks.Models.Product
+@*
+    @{
+        ViewData["Title"] = "Delete";
+    }
 
-<div class="maincontent-area">
-    <div class="container">
-        <div class="row">
-            <h3>Are you sure you want to delete this?</h3>
-            <div>
-                <h4>Product</h4>
-                <hr />
-                <dl class="dl-horizontal">
-                    <dt>
-                        @Html.DisplayNameFor(model => model.ProductName)
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.ProductName)
-                    </dd>
-                    <dt>
-                        @Html.DisplayNameFor(model => model.ProductPrice)
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.ProductPrice)
-                    </dd>
-                    <dt>
-                        @Html.DisplayNameFor(model => model.ProductImage)
-                    </dt>
-                    <dd>
-                        <img style="width: 150px; height: auto;" src="@Url.Action("GetProductImage", "AdminProducts", new{id = Model.Id})" alt="Student Image">
-                    </dd>
-                </dl>
+    <div class="maincontent-area">
+        <div class="container">
+            <div class="row">
+                <h3>Are you sure you want to delete this?</h3>
+                <div>
+                    <h4>Product</h4>
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ProductName)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.ProductName)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ProductPrice)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.ProductPrice)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ProductImage)
+                        </dt>
+                        <dd>
+                            <img style="width: 150px; height: auto;" src="@Url.Action("GetProductImage", "AdminProducts", new{id = Model.Id})" alt="Student Image">
+                        </dd>
+                    </dl>
 
-                <form asp-action="Delete">
-                    <input type="hidden" asp-for="Id" />
-                    <input type="submit" value="Delete" class="btn btn-default" /> |
-                    <a asp-action="Index">Back to List</a>
-                </form>
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="Id" />
+                        <input type="submit" value="Delete" class="btn btn-default" /> |
+                        <a asp-action="Index">Back to List</a>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
+*@
+<div class="modal-header text-center">
+    <h4 class="modal-title w-100 font-weight-bold">Delete Product</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
 </div>
+<div class="modal-body mx-3">
+    <div class="md-form mb-5">
+        <i class="fas fa-user prefix grey-text"></i>
+        <h5>Are you sure you want to delete this?</h5>
+        <div>
+            <dl>
+                <dt>
+                    @Html.DisplayNameFor(model => model.ProductName)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ProductName)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.ProductPrice)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ProductPrice)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.ProductImage)
+                </dt>
+                <dd>
+                    <img style="width: 150px; height: auto;" src="@Url.Action("GetProductImage", "AdminProducts", new{id = Model.Id})" alt="Student Image">
+                </dd>
+            </dl>
+            <form asp-action="Delete">
+                <input type="hidden" asp-for="Id" />
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                <a asp-action="Index">Back to List</a>
+            </form>
+        </div>
+    </div>
+</div>
+<asp:content contentplaceholderid="bodyJS" runat="server">
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+</asp:content>

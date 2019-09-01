@@ -4,79 +4,141 @@
     ViewData["Title"] = "Index";
 
 }
-<div id="subcontiner">
-    <div class="maincontent-area">
-        <div class="zigzag-bottom"></div>
+
+@{
+    var urlTemplate = Url.Action() + "?page={0}";
+    var request = ViewContext.HttpContext.Request;
+    foreach (var key in request.Query.Keys)
+    {
+        if (key == "page")
+        {
+            continue;
+        }
+
+        urlTemplate += "&" + key + "=" + request.Query[key];
+    }
+
+    var startIndex = Math.Max(Model.PageIndex - 5, 1);
+    var finishIndex = Math.Min(Model.PageIndex + 5, Model.TotalPages);
+}
+<asp:content contentplaceholderid="head" runat="server">
+    <link rel="stylesheet" type="text/css" href="~/css/AdminUsermanger.css">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</asp:content>
+<div id="subcontiner" class="product_Bg">
+    <div lass="maincontent-area">
         <div class="container">
-            <div class="row">
-                <div class="col-md-offset-3 col-md-9" style="text-align:right">
-                    <form asp-action="Index" method="get">
-                        <div class="form-actions no-color">
-                            <p>
-                                <input type="text" style="width:200px;" name="SearchString" placeholder="Find by name" value="@ViewData["currentFilter"]" />
-                                <input type="submit" value="Search" class="btn btn-default" /> |
-                                <a class="btn btn-default" asp-action="Index" asp-route-id="">Back to Full List</a>
-                            </p>
+            <div class="table-wrapper product_Bg">
+                <div class="table-title">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <h2>Books</h2>
                         </div>
-                    </form>
-                </div>
-            </div>
-            <br />
-            <br />
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="list-group" id="categories">
-                        <a class="list-group-item" asp-action="Index" asp-route-id="">All Categories</a>
-                        @{
-                            List<QualityBooks.Models.Category> categories = ViewBag.Categories;
-                            foreach (var category in categories)
-                            {
-                                <a class="list-group-item" asp-action="Index" asp-route-id="@category.Id">@category.CategroyName</a>
-                            }
-                        }
-                    </div>
-                </div>
-                <div class="col-md-9">
-                    @foreach (var item in Model)
-                    {
-                        <div class="col-md-3" style="height:450px">
-                            <div class="single-product">
-                                <div class="product-f-image">
-                                    <img src="@Url.Action("GetProductImage", "Products", new{id = item.Id})" width="150" height="150" />
-                                </div>
-                                <h2><a asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.ProductName)</a></h2>
-                                <div class="product-carousel-price">
-                                    <ins>$@Html.DisplayFor(modelItem => item.ProductPrice)</ins>
-                                </div>
+                        <div class="col-sm-7">
+                            <div class="col-md-offset-3 col-md-9" style="text-align:right">
+                                <form asp-action="Index" method="get">
+                                    <input type="text" style="width:200px; color:black;" name="SearchString" placeholder="Find by name" value="@ViewData["currentFilter"]" />
+                                    <a asp-action="Index" class="btn btn-primary">Clear Search</a>
+                                    <input type="submit" value="Search" class="btn btn-default" />
+                                </form>
+
                             </div>
                         </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="list-group" id="categories">
+                            <a class="list-group-item" asp-action="Index" asp-route-id="">All Categories</a>
+                            @{
+                    List<QualityBooks.Models.Category> categories = ViewBag.Categories;
+                    foreach (var category in categories)
+                    {
+                        <a class="list-group-item" asp-action="Index" asp-route-id="@category.Id">@category.CategroyName</a>
+        }
+                            }
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        @foreach (var item in Model)
+            {
+                <div class="col-md-3" style="height:450px">
+                    <div class="single-product">
+                        <div class="product-f-image">
+                            <img src="@Url.Action("GetProductImage", "Products", new{id = item.Id})" width="100" height="100" />
+                        </div>
+                        <h2><a asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.ProductName)</a></h2>
+                        <div class="product-carousel-price">
+                            <ins>$@Html.DisplayFor(modelItem => item.ProductPrice)</ins>
+                            <a href="~/ShoppingCart/AddToCart/@Html.DisplayFor(modelItem => item.Id)">
+                                <span class="glyphicon glyphicon-shopping-cart"></span>
+                                Add To Cart
+                            </a>
+                        </div>
+                    </div>
+                </div>
+}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-9 col-md-offset-3">
+                        Products @(Model.FirstRowOnPage) to @Model.LastRowOnPage of @Model.TotalPages Total page
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 col-sm-8">
+                        @if (Model.PageIndex > 1)
+            {
+                <ul class="pagination pull-right">
+                    <li><a href="@urlTemplate.Replace("{0}", "1")">&laquo;</a></li>
+                    @for (var i = startIndex; i <= finishIndex; i++)
+        {
+            @if (i == Model.PageIndex)
+{
+
+            <li><span>@i</span></li>
+}
+else
+{
+
+            <li><a href="@urlTemplate.Replace("{0}", i.ToString())">@i</a></li>
+}
+}
+                    <li><a href="@urlTemplate.Replace("{0}", Model.TotalPages.ToString())">&raquo;</a></li>
+                </ul>}
+                    </div>
+                </div>
+                @*
+                <div class="row">
+                    @{
+            var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
                     }
-                </div>
-            </div>
-            <div class="row">
-                @{
-                    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-                    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
-                }
-                <div class="col-md-9 col-md-offset-3">
-                    <div class="col-md-2" style="text-align:left">
-                        <a asp-action="Index"
-                           asp-route-page="@(Model.PageIndex - 1)"
-                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                           class="btn btn-default @prevDisabled btn">
-                            <span class="glyphicon glyphicon-step-backward"></span>Previous
-                        </a>
-                    </div>
-                    <div class="col-md-2" style="text-align:right">
-                        <a asp-action="Index"
-                           asp-route-page="@(Model.PageIndex + 1)"
-                           asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                           class="btn btn-default @nextDisabled btn">
-                            Next<span class="glyphicon glyphicon-step-forward"></span>
-                        </a>
+                    <div class="col-md-9 col-md-offset-3">
+                        <div class="col-md-2" style="text-align:left">
+                            <a asp-action="Index"
+                               asp-route-page="@(Model.PageIndex - 1)"
+                               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                               class="btn btn-default @prevDisabled btn">
+                                <span class="glyphicon glyphicon-step-backward"></span>Previous
+                            </a>
+                        </div>
+                        <div class="col-md-2" style="text-align:right">
+                            <a asp-action="Index"
+                               asp-route-page="@(Model.PageIndex + 1)"
+                               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                               class="btn btn-default @nextDisabled btn">
+                                Next<span class="glyphicon glyphicon-step-forward"></span>
+                            </a>
+                        </div>
                     </div>
                 </div>
+                *@
             </div>
         </div>
     </div>
-    </div>
+</div>
