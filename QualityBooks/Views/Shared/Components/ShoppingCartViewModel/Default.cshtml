@@ -6,92 +6,201 @@
     decimal totalGST = @Model.CartTotal * Convert.ToDecimal(0.15);
     decimal grandTotal = @Model.CartTotal + totalGST;
 }
+<div id="subcontiner">
+    <div class="single-product-area">
+        <div class="zigzag-bottom"></div>
+        <div class="container">
 
-<div class="single-product-area">
-    <div class="zigzag-bottom"></div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="product-content-right">
-                    <div class="woocommerce">
-                        <table cellspacing="0" class="shop_table cart">
-                            <thead>
-                                <tr>
-                                    <th class="product-remove">&nbsp;</th>
-                                    <th class="product-name">Product</th>
-                                    <th class="product-quantity">Quantity</th>
-                                    <th class="product-subtotal">Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if (@Model.CartItems.Count > 0)
-                                {
-                                    @foreach (var item in Model.CartItems)
-                                    {
-                                        <tr class="cart_item">
-                                            <td class="product-remove">
-                                                <a asp-action="RemoveFromCart" asp-controller="ShoppingCart" asp-route-id="@item.Product.Id"><span class="glyphicon glyphicon-remove-circle"></span></a>
-                                            </td>
-                                            <td class="product-name">
-                                                <a asp-controller="Products" asp-action="Details" asp-route-id="@item.Product.Id">@item.Product.ProductName</a>
-                                            </td>
-                                            <td class="product-quantity">
-                                                @item.Count
-                                            </td>
-                                            <td class="product-subtotal">
-                                                <span class="amount">$@item.Product.ProductPrice</span>
-                                            </td>
-                                        </tr>
-                                    }
-
-                                    <tr>
-                                        <td class="actions" style="text-align:right" colspan="4">
-                                            <a asp-action="ClearCart" asp-controller="ShoppingCart">
-                                                Clear Cart <span class="glyphicon glyphicon-step-forward"></span>
-                                            </a>
-                                            |
-                                            <a asp-action="Create" asp-controller="Orders">
-                                                Proceed to Checkout <span class="glyphicon glyphicon-step-forward"></span>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                }
-                                else
-                                {
-                                    <tr>
-                                        <td colspan="4">
-                                            No Products in the Cart
-                                        </td>
-                                    </tr>
-
-                                }
-                            </tbody>
-                        </table>
-                        @if (@Model.CartItems.Count > 0)
-                        {
-                            <div class="cart-collaterals">
-                                <div class="cart_totals ">
-                                    <h2>Cart Totals</h2>
-                                    <table cellspacing="0">
-                                        <tbody>
-                                            <tr class="order-total">
-                                                <th>Order Sub Total</th>
-                                                <td><strong><span class="amount">$@Model.CartTotal</span></strong> </td>
-                                            </tr><tr class="order-total">
-                                                <th>GST (15%)</th>
-                                                <td><strong><span class="amount">$@Math.Round(totalGST, 2)</span></strong> </td>
-                                            </tr><tr class="order-total">
-                                                <th>Order Total</th>
-                                                <td><strong><span class="amount">$@Math.Round(grandTotal,2)</span></strong> </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+            <div class="row">
+                <div class="col-sm-12 col-md-10 col-md-offset-1">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th class="text-center">Price</th>
+                                <th> </th>
+                                <th> </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (@Model.CartItems.Count > 0)
+    {
+                        @foreach (var item in Model.CartItems)
+{
+                        <tr>
+                            <td class="col-sm-8 col-md-6">
+                                <div class="media">
+                                    <img class="media-object thumbnail pull-left"  src="@Url.Action("GetProductImage", "Products", new { id = item.Product.Id })" style="width: 72px; height: 72px;">
+                                    <div class="media-body">
+                                        <h4 class="media-heading"> <a asp-controller="Products" asp-action="Details" asp-route-id="@item.Product.Id" data-toggle="modal" data-target="#modalDetailProduct">@item.Product.ProductName</a></h4>
+                                        <span>Status: </span><span class="text-success"><strong>In Stock</strong></span>
+                                    </div>
                                 </div>
+                            </td>
+                            <td class="col-sm-1 col-md-1" style="text-align: center">
+                                <input type="email" class="form-control" id="exampleInputEmail1" disabled value="@item.Count">
+                            </td>
+                            <td class="col-sm-1 col-md-1 text-center"><strong>$@item.Product.ProductPrice</strong></td>
+                            <td class="col-sm-1 col-md-1">
+                                <a asp-action="RemoveFromCart" asp-controller="ShoppingCart" asp-route-id="@item.Product.Id"><span class="glyphicon glyphicon-remove"></span> Remove</a>
+                            </td>
+
+                        </tr>
+}
+
+
+}
+else
+{
+                        <tr>
+                            <td colspan="4">
+                                No Products in the Cart
+                            </td>
+                        </tr>
+
+}
+
+                            @if (@Model.CartItems.Count > 0)
+    {
+
+                        <tr>
+                            <td>   </td>
+                            <td>   </td>
+                            <td>   </td>
+                            <td><h5>Subtotal</h5></td>
+                            <td class="text-right"><h5><strong>$@Model.CartTotal</strong></h5></td>
+                        </tr>
+                        <tr>
+                            <td>   </td>
+                            <td>   </td>
+                            <td>   </td>
+                            <td><h5>GST (15%)</h5></td>
+                            <td class="text-right"><strong><span class="amount">$@Math.Round(totalGST, 2)</span></strong></td>
+                        </tr>
+                        <tr>
+                            <td>   </td>
+                            <td>   </td>
+                            <td>   </td>
+                            <td><h3>Order Total</h3></td>
+                            <td class="text-right"><h3><strong>$@Math.Round(grandTotal, 2)</strong></h3></td>
+                        </tr>
+                        <tr>
+                            <td>   </td>
+                            <td>   </td>
+                            <td>   </td>
+                            <td>
+                                <a asp-action="ClearCart" asp-controller="ShoppingCart">Clear Cart</a>
+                            </td>
+                            <td>
+                                <a asp-action="Create" asp-controller="Orders">Checkout <span class="glyphicon glyphicon-shopping-cart"></span></a>
+                            </td>
+                        </tr>
+}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+           @*
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="product-content-right">
+                        <div class="woocommerce">
+                            <table cellspacing="0" class="shop_table cart">
+                                <thead>
+                                    <tr>
+                                        <th class="product-remove">&nbsp;</th>
+                                        <th class="product-name">Product</th>
+                                        <th class="product-quantity">Quantity</th>
+                                        <th class="product-subtotal">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (@Model.CartItems.Count > 0)
+                            {
+                                @foreach (var item in Model.CartItems)
+                        {
+                            <tr class="cart_item">
+                                <td class="product-remove">
+                                    <a asp-action="RemoveFromCart" asp-controller="ShoppingCart" asp-route-id="@item.Product.Id"><span class="glyphicon glyphicon-remove-circle"></span></a>
+                                </td>
+                                <td class="product-name">
+                                    <a asp-controller="Products" asp-action="Details" asp-route-id="@item.Product.Id">@item.Product.ProductName</a>
+                                </td>
+                                <td class="product-quantity">
+                                    @item.Count
+                                </td>
+                                <td class="product-subtotal">
+                                    <span class="amount">$@item.Product.ProductPrice</span>
+                                </td>
+                            </tr>
+                }
+
+                                <tr>
+                                    <td class="actions" style="text-align:right" colspan="4">
+                                        <a asp-action="ClearCart" asp-controller="ShoppingCart">
+                                            Clear Cart <span class="glyphicon glyphicon-step-forward"></span>
+                                        </a>
+                                        |
+                                        <a asp-action="Create" asp-controller="Orders">
+                                            Proceed to Checkout <span class="glyphicon glyphicon-step-forward"></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4">
+                                No Products in the Cart
+                            </td>
+                        </tr>
+
+            }
+                                </tbody>
+                            </table>
+                            @if (@Model.CartItems.Count > 0)
+                    {
+                        <div class="cart-collaterals">
+                            <div class="cart_totals ">
+                                <h2>Cart Totals</h2>
+                                <table cellspacing="0">
+                                    <tbody>
+                                        <tr class="order-total">
+                                            <th>Order Sub Total</th>
+                                            <td><strong><span class="amount">$@Model.CartTotal</span></strong> </td>
+                                        </tr>
+                                        <tr class="order-total">
+                                            <th>GST (15%)</th>
+                                            <td><strong><span class="amount">$@Math.Round(totalGST, 2)</span></strong> </td>
+                                        </tr>
+                                        <tr class="order-total">
+                                            <th>Order Total</th>
+                                            <td><strong><span class="amount">$@Math.Round(grandTotal, 2)</span></strong> </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
-                        }
+                        </div>
+            }
+                        </div>
                     </div>
                 </div>
             </div>
+                *@
+        </div>
+    </div>
+    </div>
+
+<div class="modal fade" id="modalDetailProduct" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
         </div>
     </div>
 </div>
