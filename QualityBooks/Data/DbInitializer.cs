@@ -8,6 +8,7 @@ namespace QualityBooks.Data
 {
     public static class DbInitializer
     {
+       
         public static void Initialize(QualityBooksContext context)
         {
             context.Database.EnsureCreated();
@@ -43,6 +44,23 @@ namespace QualityBooks.Data
                 context.Suppliers.Add(s);
             }
             context.SaveChanges();
+    
+            string path = Environment.CurrentDirectory + @"/wwwroot/images/Temp/defaultBook.jpg";
+            byte[] image = System.IO.File.ReadAllBytes(path);
+
+            var Product = new Product[]
+            {
+                new Product{CategoryId=1, Description="This is super book", ProductImage=image, ProductName="Clean Code", ProductPrice=45, SupplierId=1, }
+
+            };
+            foreach (Product b in Product)
+            {
+                context.Products.Add(b);
+            }
+            context.SaveChanges();
+
+
+
         }
     }
 }

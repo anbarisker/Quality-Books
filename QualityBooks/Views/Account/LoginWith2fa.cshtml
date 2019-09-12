@@ -1,0 +1,113 @@
+﻿@model LoginWith2faViewModel
+@{
+    ViewData["Title"] = "Two-factor authentication";
+}
+<asp:content contentplaceholderid="head" runat="server">
+    <link rel="stylesheet" type="text/css" href="~/login/css/util.css">
+    <link rel="stylesheet" type="text/css" href="~/login/css/main.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/login/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/login/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/login/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/login/vendor/animsition/css/animsition.min.css">
+
+</asp:content>
+
+
+<div id="subcontiner">
+    <div class="maincontent-area">
+        <div class="container">
+            <div class="row">
+                <section>
+
+                    <div class="container-login100" style="background-image: url('../images/Login/bg-02.jpg');">
+                        <div class="wrap-login100 p-t-30 p-b-50">
+                            <span class="login100-form-title p-b-41">
+                                Account Login
+                            </span>
+                            <form method="post" asp-route-returnUrl="@ViewData["ReturnUrl"]" class="login100-form validate-form p-b-33 p-t-5">
+                                <input asp-for="RememberMe" type="hidden" />
+                                <div asp-validation-summary="All" class="text-danger"></div>
+                                <div class="wrap-input100 validate-input form-group" data-validate="Enter E-mail">
+                                    <input asp-for="TwoFactorCode" class="input100" type="text" placeholder="Two Factor Code" class="form-control" autocomplete="off" />
+                                    <span class="focus-input100" data-placeholder="&#xe82a;"></span>
+                                    <span asp-validation-for="TwoFactorCode" class="text-danger"></span>
+                                </div>
+                                <div class="container-login100-form-btn m-t-32">
+                                    <div class="checkbox">
+                                        <label asp-for="RememberMachine">
+                                            <input asp-for="RememberMachine" />
+                                            @Html.DisplayNameFor(m => m.RememberMachine)
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="container-login100-form-btn m-t-32">
+                                    <button type="submit" class="login100-form-btn">
+                                        Login
+                                    </button>
+                                </div>
+                                <div class="container-login100-form-btn m-t-32">
+                                    <p>
+                                        Don't have access to your authenticator device? <br /> 
+                                        You can <a asp-action="LoginWithRecoveryCode" asp-route-returnUrl="@ViewData["ReturnUrl"]">log in with a recovery code</a>.
+                                    </p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
+
+
+
+
+@*
+
+    <h2>@ViewData["Title"]</h2>
+    <hr />
+    <p>Your login is protected with an authenticator app. Enter your authenticator code below.</p>
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post" asp-route-returnUrl="@ViewData["ReturnUrl"]">
+                <input asp-for="RememberMe" type="hidden" />
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="TwoFactorCode"></label>
+                    <input asp-for="TwoFactorCode" class="form-control" autocomplete="off" />
+                    <span asp-validation-for="TwoFactorCode" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label asp-for="RememberMachine">
+                            <input asp-for="RememberMachine" />
+                            @Html.DisplayNameFor(m => m.RememberMachine)
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-default">Log in</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <p>
+        Don't have access to your authenticator device? You can
+        <a asp-action="LoginWithRecoveryCode" asp-route-returnUrl="@ViewData["ReturnUrl"]">log in with a recovery code</a>.
+    </p>
+
+    @section Scripts {
+        @await Html.PartialAsync("_ValidationScriptsPartial")
+    }
+*@

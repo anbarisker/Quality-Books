@@ -1,0 +1,11 @@
+/Users/anbarisker/Projects/QualityBooks/QualityBooks/bin/Release/netcoreapp2.0/QualityBooks.deps.json
+/Users/anbarisker/Projects/QualityBooks/QualityBooks/bin/Release/netcoreapp2.0/QualityBooks.runtimeconfig.json
+/Users/anbarisker/Projects/QualityBooks/QualityBooks/bin/Release/netcoreapp2.0/QualityBooks.runtimeconfig.dev.json
+/Users/anbarisker/Projects/QualityBooks/QualityBooks/bin/Release/netcoreapp2.0/QualityBooks.dll
+/Users/anbarisker/Projects/QualityBooks/QualityBooks/bin/Release/netcoreapp2.0/QualityBooks.pdb
+/Users/anbarisker/Projects/QualityBooks/QualityBooks/obj/Release/netcoreapp2.0/QualityBooks.csprojAssemblyReference.cache
+/Users/anbarisker/Projects/QualityBooks/QualityBooks/obj/Release/netcoreapp2.0/QualityBooks.csproj.CoreCompileInputs.cache
+/Users/anbarisker/Projects/QualityBooks/QualityBooks/obj/Release/netcoreapp2.0/QualityBooks.AssemblyInfoInputs.cache
+/Users/anbarisker/Projects/QualityBooks/QualityBooks/obj/Release/netcoreapp2.0/QualityBooks.AssemblyInfo.cs
+/Users/anbarisker/Projects/QualityBooks/QualityBooks/obj/Release/netcoreapp2.0/QualityBooks.dll
+/Users/anbarisker/Projects/QualityBooks/QualityBooks/obj/Release/netcoreapp2.0/QualityBooks.pdb

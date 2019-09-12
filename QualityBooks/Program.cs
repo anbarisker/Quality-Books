@@ -21,6 +21,7 @@ namespace QualityBooks
             //var host = CreateWebHostBuilder(args).Build();
             var host = BuildWebHost(args); //Added to replace the above line in Week 1
 
+
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
@@ -36,6 +37,7 @@ namespace QualityBooks
                     logger.LogError(ex, "An error occurred while seeding the database.");
                 }
             }
+
             host.Run();
         }
 

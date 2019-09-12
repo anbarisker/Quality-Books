@@ -127,6 +127,45 @@ namespace QualityBooks
                         await _userManager.AddToRoleAsync(poweruser, "Admin");
                     }
                 }
+
+                //string path = Environment.CurrentDirectory + @"/wwwroot/images/Temp/defaultBook.jpg";
+                //byte[] image = System.IO.File.ReadAllBytes(path);
+
+               
+                var normalUser = new ApplicationUser
+                {
+                    UserName = Configuration.GetSection("CustomerSettings")["UserEmail"],
+                    Email = Configuration.GetSection("CustomerSettings")["UserEmail"],
+                    Address = "Customer Address",
+                    Enabled = true,
+                   // BirthDate = DateTime.Parse("24/08/1992"),
+                    City = "Singapore",
+                    Country = "Singapore",
+                    Created_At = DateTime.Now,
+                    Gender = "Male",
+                    LastName = "Rasan",
+                    EmailConfirmed = true,
+                    MobileNo = 2115425344,
+                    HomeNo = 34424234,
+                    PostalCode = 4232344,
+                    Updated_At = DateTime.Now
+                    //Photo = image
+
+                };
+                var _userManagerCustomer = serviceScope.ServiceProvider.GetService<UserManager<ApplicationUser>>();
+                var customer_set = _userManager.FindByEmailAsync(Configuration.GetSection("CustomerSettings")["UserEmail"]);
+                if (customer_set.Result == null)
+                {
+                    string UserPassword = Configuration.GetSection("CustomerSettings")["UserPassword"];
+                    normalUser.EmailConfirmed = true;
+                    var createPowerUser = await _userManager.CreateAsync(normalUser, UserPassword);
+                    if (createPowerUser.Succeeded)
+                    {
+                        //here we tie the new user to the "Admin" role 
+                        await _userManager.AddToRoleAsync(normalUser, "Member");
+                    }
+                }
+
             }
 
 
