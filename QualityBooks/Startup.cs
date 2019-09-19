@@ -30,7 +30,7 @@ namespace QualityBooks
 
             services.AddDbContext<QualityBooksContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            
+
             //Add Identity
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<QualityBooksContext>()
@@ -63,7 +63,10 @@ namespace QualityBooks
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                //app.UseExceptionHandler("/Home/Error");
+                app.UseDeveloperExceptionPage();
+                app.UseBrowserLink();
+                app.UseDatabaseErrorPage();
             }
 
             app.UseStaticFiles();
@@ -107,12 +110,16 @@ namespace QualityBooks
 
                 }
 
+                string path = Environment.CurrentDirectory + @"/wwwroot/images/Temp/defaultBook.jpg";
+                byte[] image = System.IO.File.ReadAllBytes(path);
+
                 var poweruser = new ApplicationUser
                 {
                     UserName = Configuration.GetSection("UserSettings")["UserEmail"],
                     Email = Configuration.GetSection("UserSettings")["UserEmail"],
                     Address = "Addmin Address",
-                    Enabled = true
+                    Enabled = true,
+                    Photo = image
                 };
                 var _userManager = serviceScope.ServiceProvider.GetService<UserManager<ApplicationUser>>();
                 var test = _userManager.FindByEmailAsync(Configuration.GetSection("UserSettings")["UserEmail"]);
@@ -128,17 +135,15 @@ namespace QualityBooks
                     }
                 }
 
-                //string path = Environment.CurrentDirectory + @"/wwwroot/images/Temp/defaultBook.jpg";
-                //byte[] image = System.IO.File.ReadAllBytes(path);
 
-               
+
                 var normalUser = new ApplicationUser
                 {
                     UserName = Configuration.GetSection("CustomerSettings")["UserEmail"],
                     Email = Configuration.GetSection("CustomerSettings")["UserEmail"],
                     Address = "Customer Address",
                     Enabled = true,
-                   // BirthDate = DateTime.Parse("24/08/1992"),
+                    // BirthDate = DateTime.Parse("24/08/1992"),
                     City = "Singapore",
                     Country = "Singapore",
                     Created_At = DateTime.Now,
@@ -148,8 +153,8 @@ namespace QualityBooks
                     MobileNo = 2115425344,
                     HomeNo = 34424234,
                     PostalCode = 4232344,
-                    Updated_At = DateTime.Now
-                    //Photo = image
+                    Updated_At = DateTime.Now,
+                    Photo = image
 
                 };
                 var _userManagerCustomer = serviceScope.ServiceProvider.GetService<UserManager<ApplicationUser>>();
